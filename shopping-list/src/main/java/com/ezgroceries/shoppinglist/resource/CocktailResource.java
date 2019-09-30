@@ -11,6 +11,17 @@ public class CocktailResource {
     private String name;
     private String serving;
     private String instructions;
+    private String pictureUrl;
+    private List<String> ingredients;
+
+    public CocktailResource(UUID uuid, String name, String serving, String instructions, String pictureUrl, List<String> ingredients) {
+        this.uuid = uuid;
+        this.name = name;
+        this.serving = serving;
+        this.instructions = instructions;
+        this.pictureUrl = pictureUrl;
+        this.ingredients = ingredients;
+    }
 
     public UUID getUuid() {
         return uuid;
@@ -57,18 +68,6 @@ public class CocktailResource {
     }
 
     public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    private String pictureUrl;
-    private List<String> ingredients;
-
-    public CocktailResource(UUID uuid, String name, String serving, String instructions, String pictureUrl, List<String> ingredients) {
-        this.uuid = uuid;
-        this.name = name;
-        this.serving = serving;
-        this.instructions = instructions;
-        this.pictureUrl = pictureUrl;
         this.ingredients = ingredients;
     }
 
