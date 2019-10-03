@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +17,15 @@ public class CocktailController {
 
     private List<CocktailResource> cocktails = new ArrayList<>();
 
+    public CocktailController() {
+        this.cocktails = getDummyResources();
+    }
+
     @GetMapping
     public List<CocktailResource> get(@RequestParam String search) {
-        cocktails = getDummyResources();
-        return cocktails;
+        return cocktails.stream()
+                .filter(item -> item.getName().contains(search))
+                .collect(Collectors.toList());
     }
 
     private List<CocktailResource> getDummyResources() {

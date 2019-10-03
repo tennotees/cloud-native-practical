@@ -25,9 +25,11 @@ public class CocktailControllerTests {
     {
         mvc.perform( MockMvcRequestBuilders
                 .get("/cocktails")
-                .param("search", "1")
+                .param("search", "Blue")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andReturn();
+
     }
 
     @Test
@@ -35,7 +37,7 @@ public class CocktailControllerTests {
     {
         mvc.perform( MockMvcRequestBuilders
                 .get("/cocktails")
-                .param("search", "1"))
+                .param("search", "Blue"))
                 .andExpect(header().string("Content-type", MediaType.APPLICATION_JSON_UTF8_VALUE));
     }
 
@@ -44,7 +46,7 @@ public class CocktailControllerTests {
     {
         mvc.perform( MockMvcRequestBuilders
                 .get("/cocktails")
-                .param("search", "1")
+                .param("search", "Margerita")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].uuid").value("23b3d85a-3928-41c0-a533-6538a71e17c4"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].uuid").value("d615ec78-fe93-467b-8d26-5d26d8eab073"));
