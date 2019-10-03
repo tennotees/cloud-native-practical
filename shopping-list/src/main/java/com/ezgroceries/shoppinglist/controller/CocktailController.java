@@ -1,6 +1,7 @@
 package com.ezgroceries.shoppinglist.controller;
 
 import com.ezgroceries.shoppinglist.resource.CocktailResource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -13,9 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/cocktails", produces = "application/json")
 public class CocktailController {
 
+    private List<CocktailResource> cocktails = new ArrayList<>();
+
     @GetMapping
     public List<CocktailResource> get(@RequestParam String search) {
-        return getDummyResources();
+        cocktails = getDummyResources();
+        return cocktails;
     }
 
     private List<CocktailResource> getDummyResources() {
@@ -32,5 +36,10 @@ public class CocktailController {
                         "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt..",
                         "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
                         Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
+    }
+
+    public CocktailResource getById(UUID id) {
+        return cocktails.stream().filter(cocktail -> cocktail.getUuid().equals(id))
+                .findFirst().orElse(null);
     }
 }
