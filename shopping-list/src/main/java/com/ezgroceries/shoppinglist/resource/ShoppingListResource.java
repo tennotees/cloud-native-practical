@@ -4,12 +4,12 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 @Resource
-public class ShoppingList {
+public class ShoppingListResource {
 
     private UUID shoppingListId;
     private String name;
 
-    public ShoppingList(String name) {
+    public ShoppingListResource(String name) {
         this.shoppingListId = UUID.randomUUID();
         this.name = name;
     }

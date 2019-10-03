@@ -1,6 +1,6 @@
 package com.ezgroceries.shoppinglist.controller;
 
-import com.ezgroceries.shoppinglist.resource.ShoppingList;
+import com.ezgroceries.shoppinglist.resource.ShoppingListResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +14,8 @@ public class ShoppingListController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingList creteShoppingList(@RequestParam String name) {
-        return new ShoppingList(name);
+    public ShoppingListResource creteShoppingList(@RequestParam String name) {
+        return new ShoppingListResource(name);
     }
 
 }
