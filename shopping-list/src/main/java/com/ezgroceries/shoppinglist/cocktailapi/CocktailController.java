@@ -1,11 +1,11 @@
-package com.ezgroceries.shoppinglist.controller;
+package com.ezgroceries.shoppinglist.cocktailapi;
 
-import com.ezgroceries.shoppinglist.resource.CocktailResource;
+import com.ezgroceries.shoppinglist.cocktailapi.service.CocktailDBClientService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,15 +17,16 @@ public class CocktailController {
 
     private List<CocktailResource> cocktails = new ArrayList<>();
 
-    public CocktailController() {
-        this.cocktails = getDummyResources();
+    private final CocktailDBClientService cocktailDBClientService;
+
+    @Autowired
+    public CocktailController(CocktailDBClientService cocktailDBClientService) {
+        this.cocktailDBClientService = cocktailDBClientService;
     }
 
     @GetMapping
     public List<CocktailResource> get(@RequestParam String search) {
-        return cocktails.stream()
-                .filter(item -> item.getName().contains(search))
-                .collect(Collectors.toList());
+        return cocktailDBClientService.searchCocktailsNameContaining(search);
     }
 
     @GetMapping(path = "/init")

@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.resource;
+package com.ezgroceries.shoppinglist.cocktailapi;
 
 import java.util.List;
 import java.util.UUID;
@@ -7,28 +7,30 @@ import javax.annotation.Resource;
 @Resource
 public class CocktailResource {
 
-    private UUID uuid;
+    private UUID cocktailId;
     private String name;
-    private String serving;
+    private String glass;
     private String instructions;
-    private String pictureUrl;
+    private String image;
     private List<String> ingredients;
 
-    public CocktailResource(UUID uuid, String name, String serving, String instructions, String pictureUrl, List<String> ingredients) {
-        this.uuid = uuid;
+    public CocktailResource() {}
+
+    public CocktailResource(UUID cocktailId, String name, String glass, String instructions, String image, List<String> ingredients) {
+        this.cocktailId = cocktailId;
         this.name = name;
-        this.serving = serving;
+        this.glass = glass;
         this.instructions = instructions;
-        this.pictureUrl = pictureUrl;
+        this.image = image;
         this.ingredients = ingredients;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getCocktailId() {
+        return cocktailId;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setCocktailId(UUID cocktailId) {
+        this.cocktailId = cocktailId;
     }
 
     public String getName() {
@@ -39,12 +41,12 @@ public class CocktailResource {
         this.name = name;
     }
 
-    public String getServing() {
-        return serving;
+    public String getGlass() {
+        return glass;
     }
 
-    public void setServing(String serving) {
-        this.serving = serving;
+    public void setGlass(String glass) {
+        this.glass = glass;
     }
 
     public String getInstructions() {
@@ -55,12 +57,12 @@ public class CocktailResource {
         this.instructions = instructions;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<String> getIngredients() {
