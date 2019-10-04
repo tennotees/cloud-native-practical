@@ -28,6 +28,12 @@ public class CocktailController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(path = "/init")
+    public List<CocktailResource> initDummies() {
+        this.cocktails = getDummyResources();
+        return cocktails;
+    }
+
     private List<CocktailResource> getDummyResources() {
         return Arrays.asList(
                 new CocktailResource(
@@ -44,8 +50,4 @@ public class CocktailController {
                         Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
     }
 
-    public CocktailResource getById(UUID id) {
-        return cocktails.stream().filter(cocktail -> cocktail.getUuid().equals(id))
-                .findFirst().orElse(null);
-    }
 }

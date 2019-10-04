@@ -1,9 +1,13 @@
 package com.ezgroceries.shoppinglist.controller;
 
+import com.ezgroceries.shoppinglist.resource.ShoppingListIngredientsResource;
 import com.ezgroceries.shoppinglist.resource.ShoppingListResource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,8 +52,47 @@ public class ShoppingListController {
     }
 
     @GetMapping
-    public HttpEntity<List<ShoppingListResource>> getAllShoppingLists() {
-        return ResponseEntity.ok().body(shoppingLists);
+    public HttpEntity<List<ShoppingListIngredientsResource>> getAllShoppingLists() {
+        List<ShoppingListIngredientsResource> shoppingListIngredientsResources = new ArrayList<>();
+
+        ShoppingListIngredientsResource s;
+
+        for (ShoppingListResource shoppingList : shoppingLists) {
+            s = new ShoppingListIngredientsResource();
+            s.setShoppingListId(shoppingList.getShoppingListId());
+            s.setName(shoppingList.getName());
+            for (UUID cocktailsInList : shoppingList.getCocktails()) {
+                if (cocktailsInList.equals(UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4"))) {
+                    s.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")));
+                } else {
+                    s.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
+                }
+            }
+            shoppingListIngredientsResources.add(s);
+        }
+
+        return ResponseEntity.ok().body(shoppingListIngredientsResources);
     }
 
+    @GetMapping(path = "/{listId}")
+    public HttpEntity<ShoppingListIngredientsResource> getShoppingList(@PathVariable UUID listId) throws Exception {
+
+        ShoppingListIngredientsResource shoppingListIngredients = new ShoppingListIngredientsResource();
+
+        Optional<ShoppingListResource> shoppingList = shoppingLists.stream().
+                filter(resource -> resource.getShoppingListId().equals(listId)).findFirst();
+
+        if (shoppingList.isPresent()) {
+            shoppingListIngredients.setShoppingListId(shoppingList.get().getShoppingListId());
+            shoppingListIngredients.setName(shoppingList.get().getName());
+            for (UUID cocktailsInList : shoppingList.get().getCocktails()) {
+                if (cocktailsInList.equals(UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4"))) {
+                    shoppingListIngredients.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")));
+                } else {
+                    shoppingListIngredients.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
+                }
+            }
+        }
+        return ResponseEntity.ok().body(shoppingListIngredients);
+    }
 }
