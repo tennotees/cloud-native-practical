@@ -1,5 +1,6 @@
 package com.ezgroceries.shoppinglist.cocktailapi;
 
+import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
 import com.ezgroceries.shoppinglist.cocktailapi.service.CocktailDBClientService;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CocktailController {
 
     private List<CocktailResource> cocktails = new ArrayList<>();
-
     private final CocktailDBClientService cocktailDBClientService;
 
     @Autowired
     public CocktailController(CocktailDBClientService cocktailDBClientService) {
         this.cocktailDBClientService = cocktailDBClientService;
     }
+
 
     @GetMapping
     public List<CocktailResource> get(@RequestParam String search) {
