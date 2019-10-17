@@ -1,10 +1,9 @@
-package com.ezgroceries.shoppinglist.cocktailapi;
+package com.ezgroceries.shoppinglist.cocktailapi.db;
 
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Resource;
 
-@Resource
+//@Resource
 public class CocktailResource {
 
     private UUID cocktailId;

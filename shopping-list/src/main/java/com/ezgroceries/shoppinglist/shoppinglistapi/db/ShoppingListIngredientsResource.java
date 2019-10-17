@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.resource;
+package com.ezgroceries.shoppinglist.shoppinglistapi.db;
 
 import java.util.ArrayList;
 import java.util.List;

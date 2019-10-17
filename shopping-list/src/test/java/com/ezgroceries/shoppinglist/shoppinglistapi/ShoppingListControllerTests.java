@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.controller;
+package com.ezgroceries.shoppinglist.shoppinglistapi;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -119,7 +119,7 @@ public class ShoppingListControllerTests {
         Map resultMap = objectMapper.readValue(result.getResponse().getContentAsString(), Map.class);
         assertEquals(resultMap.get("shoppingListId"), "27912cbc-165e-4182-8491-23afb0e29919");
         assertEquals(resultMap.get("name"), "Stephanie's birthday");
-        assertEquals(resultMap.get("ingredients"), Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt"));
+        assertEquals(resultMap.get("ingredients"), Arrays.asList("Tequila","Triple sec","Lime juice","Salt"));
 
     }
 

@@ -1,7 +1,7 @@
-package com.ezgroceries.shoppinglist.controller;
+package com.ezgroceries.shoppinglist.shoppinglistapi;
 
-import com.ezgroceries.shoppinglist.resource.ShoppingListIngredientsResource;
-import com.ezgroceries.shoppinglist.resource.ShoppingListResource;
+import com.ezgroceries.shoppinglist.shoppinglistapi.db.ShoppingListIngredientsResource;
+import com.ezgroceries.shoppinglist.shoppinglistapi.db.ShoppingListResource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.ezgroceries.shoppinglist.cocktailapi.service;
 
-import com.ezgroceries.shoppinglist.cocktailapi.CocktailResource;
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailDBClient;
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailDBResponse;
+import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
 import com.google.common.base.Strings;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CocktailDBClientServiceImpl implements CocktailDBClientService {
 
-    private final CocktailDBClient cocktailDBClient;
+    public final CocktailDBClient cocktailDBClient;
 
     @Autowired
     public CocktailDBClientServiceImpl(CocktailDBClient cocktailDBClient) {
