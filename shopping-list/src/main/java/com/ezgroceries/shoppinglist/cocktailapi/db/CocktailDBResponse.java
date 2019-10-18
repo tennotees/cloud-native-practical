@@ -1,17 +1,23 @@
 package com.ezgroceries.shoppinglist.cocktailapi.db;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CocktailDBResponse {
 
-    private List<DrinkResource> drinks;
+    private Set<DrinkResource> drinks;
 
-    public List<DrinkResource> getDrinks() {
+    public Set<DrinkResource> getDrinks() {
         return drinks;
     }
 
-    public void setDrinks(List<DrinkResource> drinks) {
+    public void setDrinks(Set<DrinkResource> drinks) {
         this.drinks = drinks;
+    }
+
+    public void addDrink(DrinkResource drink) {
+        drinks = (drinks == null ? new HashSet<>() : drinks);
+        drinks.add(drink);
     }
 
     public static class DrinkResource {

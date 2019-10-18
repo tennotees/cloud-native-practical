@@ -1,11 +1,11 @@
 package com.ezgroceries.shoppinglist.cocktailapi.service;
 
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
-import java.util.List;
+import java.util.Set;
 
 
 public interface CocktailDBClientService {
 
-    public List<CocktailResource> searchCocktailsNameContaining(String search);
+    public Set<CocktailResource> searchCocktailsNameContaining(String search);
 
 }

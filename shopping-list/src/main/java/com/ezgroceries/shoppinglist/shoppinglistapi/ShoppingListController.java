@@ -4,6 +4,7 @@ import com.ezgroceries.shoppinglist.shoppinglistapi.db.ShoppingListIngredientsRe
 import com.ezgroceries.shoppinglist.shoppinglistapi.db.ShoppingListResource;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -63,9 +64,9 @@ public class ShoppingListController {
             s.setName(shoppingList.getName());
             for (UUID cocktailsInList : shoppingList.getCocktails()) {
                 if (cocktailsInList.equals(UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4"))) {
-                    s.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")));
+                    s.setIngredients(new HashSet<>(Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")));
                 } else {
-                    s.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
+                    s.setIngredients(new HashSet<>(Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
                 }
             }
             shoppingListIngredientsResources.add(s);
@@ -87,9 +88,9 @@ public class ShoppingListController {
             shoppingListIngredients.setName(shoppingList.get().getName());
             for (UUID cocktailsInList : shoppingList.get().getCocktails()) {
                 if (cocktailsInList.equals(UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4"))) {
-                    shoppingListIngredients.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")));
+                    shoppingListIngredients.setIngredients(new HashSet<>(Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")));
                 } else {
-                    shoppingListIngredients.setIngredients(new ArrayList<>(Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
+                    shoppingListIngredients.setIngredients(new HashSet<>(Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
                 }
             }
         }

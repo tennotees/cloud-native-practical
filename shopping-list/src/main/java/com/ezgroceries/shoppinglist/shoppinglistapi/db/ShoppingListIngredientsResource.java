@@ -1,21 +1,21 @@
 package com.ezgroceries.shoppinglist.shoppinglistapi.db;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class ShoppingListIngredientsResource {
     private UUID shoppingListId;
     private String name;
-    private List<String> ingredients;
+    private Set<String> ingredients;
 
     public ShoppingListIngredientsResource() {
         this.shoppingListId = null;
         this.name = null;
-        this.ingredients = new ArrayList<>();
+        this.ingredients = new HashSet<>();
     }
 
-    public ShoppingListIngredientsResource(UUID shoppingListId, String name, List<String> ingredients) {
+    public ShoppingListIngredientsResource(UUID shoppingListId, String name, Set<String> ingredients) {
         this.shoppingListId = shoppingListId;
         this.name = name;
         this.ingredients = ingredients;
@@ -37,11 +37,11 @@ public class ShoppingListIngredientsResource {
         this.name = name;
     }
 
-    public List<String> getIngredients() {
+    public Set<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(Set<String> ingredients) {
         this.ingredients = ingredients;
     }
 

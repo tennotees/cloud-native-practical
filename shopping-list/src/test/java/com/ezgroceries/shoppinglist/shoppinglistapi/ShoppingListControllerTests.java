@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.assertj.core.util.Sets;
 import org.junit.Test;
 import org.junit.matchers.JUnitMatchers;
 import org.junit.runner.RunWith;
@@ -119,7 +122,9 @@ public class ShoppingListControllerTests {
         Map resultMap = objectMapper.readValue(result.getResponse().getContentAsString(), Map.class);
         assertEquals(resultMap.get("shoppingListId"), "27912cbc-165e-4182-8491-23afb0e29919");
         assertEquals(resultMap.get("name"), "Stephanie's birthday");
-        assertEquals(resultMap.get("ingredients"), Arrays.asList("Tequila","Triple sec","Lime juice","Salt"));
+        Set<String> ingredients = ((ArrayList<String>) resultMap.get("ingredients")).stream().collect(Collectors.toSet());
+        Set<String> expectedIngredients = Sets.newHashSet(Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt"));
+        assertEquals(ingredients, expectedIngredients);
 
     }
 

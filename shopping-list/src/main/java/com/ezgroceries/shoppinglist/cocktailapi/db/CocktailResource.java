@@ -1,6 +1,6 @@
 package com.ezgroceries.shoppinglist.cocktailapi.db;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 //@Resource
@@ -11,11 +11,11 @@ public class CocktailResource {
     private String glass;
     private String instructions;
     private String image;
-    private List<String> ingredients;
+    private Set<String> ingredients;
 
     public CocktailResource() {}
 
-    public CocktailResource(UUID cocktailId, String name, String glass, String instructions, String image, List<String> ingredients) {
+    public CocktailResource(UUID cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
         this.cocktailId = cocktailId;
         this.name = name;
         this.glass = glass;
@@ -64,11 +64,11 @@ public class CocktailResource {
         this.image = image;
     }
 
-    public List<String> getIngredients() {
+    public Set<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(Set<String> ingredients) {
         this.ingredients = ingredients;
     }
 
