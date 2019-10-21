@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.cocktailapi;
 
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
-import com.ezgroceries.shoppinglist.cocktailapi.service.CocktailDBClientService;
+import com.ezgroceries.shoppinglist.cocktailapi.service.CocktailService;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class CocktailController {
 
     private Set<CocktailResource> cocktails = new HashSet<>();
-    private final CocktailDBClientService cocktailDBClientService;
+    private final CocktailService CocktailService;
 
     @Autowired
-    public CocktailController(@Qualifier("cocktailServiceImpl") CocktailDBClientService cocktailDBClientService) {
-        this.cocktailDBClientService = cocktailDBClientService;
+    public CocktailController(@Qualifier("cocktailServiceImpl") CocktailService CocktailService) {
+        this.CocktailService = CocktailService;
     }
 
 
     @GetMapping
     public Set<CocktailResource> get(@RequestParam String search) {
-        return cocktailDBClientService.searchCocktailsNameContaining(search);
+        return CocktailService.searchCocktailsNameContaining(search);
     }
 
     @GetMapping(path = "/init")

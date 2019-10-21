@@ -4,7 +4,7 @@ import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
 import java.util.Set;
 
 
-public interface CocktailDBClientService {
+public interface CocktailService {
 
     public Set<CocktailResource> searchCocktailsNameContaining(String search);
 

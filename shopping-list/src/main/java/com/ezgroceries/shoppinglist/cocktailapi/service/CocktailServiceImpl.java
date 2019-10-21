@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CocktailServiceImpl implements CocktailDBClientService {
+public class CocktailServiceImpl implements CocktailService {
 
     private CocktailRepository cocktailRepository;
 
