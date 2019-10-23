@@ -15,6 +15,10 @@ public class CocktailResource {
 
     public CocktailResource() {}
 
+    public CocktailResource(UUID cocktailId, String name, Set<String> ingredients) {
+        this(cocktailId, name, "", "", "", ingredients);
+    }
+
     public CocktailResource(UUID cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
         this.cocktailId = cocktailId;
         this.name = name;

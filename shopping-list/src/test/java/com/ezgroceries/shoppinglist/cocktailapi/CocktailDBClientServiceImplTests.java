@@ -10,27 +10,25 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+//2 ways in configuring this :
+// [1] loads a smaller context : MockitoJUnitRunner & @Mock
+// [2] loads a full ApplicationContext : SpringRunner & @MockBean
 
 
-@WebMvcTest(CocktailController.class)
-@RunWith(SpringRunner.class)
+//[1] :
+@RunWith(MockitoJUnitRunner.class)
+//[2] : @RunWith(SpringRunner.class)
 @ComponentScan("com.ezgroceries.shoppinglist.cocktailapi")
-public class CocktailServiceTests {
+public class CocktailDBClientServiceImplTests {
 
-    @Autowired
-    private MockMvc mvc;
-
-    @MockBean
+    //[1] :
+    @Mock
+    //[2] : @MockBean
     private CocktailDBClient cocktailDBClientMock;
 
     private CocktailDBClientServiceImpl cocktailDBClientService;
@@ -55,7 +53,7 @@ public class CocktailServiceTests {
     }
 
     @Test
-    public void testgetCocktailsViaDirectServiceCall_ExpectedCocktailsReturned() throws Exception
+    public void testgetCocktails_ExpectedCocktailsReturned() throws Exception
     {
         Set<CocktailResource> result = cocktailDBClientService.searchCocktailsNameContaining("Blue");
 
@@ -63,14 +61,4 @@ public class CocktailServiceTests {
         Assert.assertEquals(1, result.stream().filter(c -> c.getName().equals("Blue Margerita servicetest")).count());
     }
 
-    @Test
-    public void testgetCocktailsViaControllerApiCall_ExpectedCocktailsReturned() throws Exception
-    {
-        mvc.perform( MockMvcRequestBuilders
-                .get("/cocktails")
-                .param("search", "Blue")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Blue Margerita servicetest"));
-
-    }
 }
