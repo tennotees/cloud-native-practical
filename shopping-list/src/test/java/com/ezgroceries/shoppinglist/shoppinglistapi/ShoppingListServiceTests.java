@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -41,11 +40,6 @@ public class ShoppingListServiceTests {
 
     @MockBean
     private CocktailShoppingListRepository cocktailShoppingListRepository;
-
-    @Before
-    public void init() {
-
-    }
 
     @Test
     public void testCreateShoppingList_Success() {

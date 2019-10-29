@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -31,6 +32,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @RunWith(SpringRunner.class)
 @ComponentScan("com.ezgroceries.shoppinglist.cocktailapi")
 @AutoConfigureDataJpa
+@Ignore
 public class CocktailControllerTests {
 
     @Autowired
