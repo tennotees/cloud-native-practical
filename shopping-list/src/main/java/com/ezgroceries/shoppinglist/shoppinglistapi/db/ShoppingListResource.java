@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.shoppinglistapi.db;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import javax.annotation.Resource;
 
@@ -10,12 +10,20 @@ public class ShoppingListResource {
 
     private UUID shoppingListId;
     private String name;
-    private List<UUID> cocktailIds;
+    private Set<UUID> cocktailIds;
+
+    public ShoppingListResource() {}
 
     public ShoppingListResource(String name) {
-        this.shoppingListId = UUID.fromString("27912cbc-165e-4182-8491-23afb0e29919");
+        this.shoppingListId = UUID.randomUUID();
         this.name = name;
-        this.cocktailIds = new ArrayList<>();
+        this.cocktailIds = new HashSet<>();
+    }
+
+    public ShoppingListResource(UUID id, String name, Set<UUID> cocktailIds) {
+        this.shoppingListId = id;
+        this.name = name;
+        this.cocktailIds = cocktailIds;
     }
 
     public UUID getShoppingListId() {
@@ -34,11 +42,11 @@ public class ShoppingListResource {
         this.name = name;
     }
 
-    public List<UUID> getCocktails() {
+    public Set<UUID> getCocktails() {
         return cocktailIds;
     }
 
-    public void setCocktails(List<UUID> cocktails) {
+    public void setCocktails(Set<UUID> cocktails) {
         this.cocktailIds = cocktails;
     }
 

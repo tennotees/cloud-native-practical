@@ -5,33 +5,30 @@ import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailDBResponse.DrinkResource;
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
 import com.ezgroceries.shoppinglist.cocktailapi.service.CocktailDBClientServiceImpl;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+//2 ways in configuring this :
+// [1] loads a smaller context : MockitoJUnitRunner & @Mock
+// [2] loads a full ApplicationContext : SpringRunner & @MockBean
 
 
-@WebMvcTest(CocktailController.class)
-@RunWith(SpringRunner.class)
+//[1] :
+@RunWith(MockitoJUnitRunner.class)
+//[2] : @RunWith(SpringRunner.class)
 @ComponentScan("com.ezgroceries.shoppinglist.cocktailapi")
-public class CocktailServiceTests {
+public class CocktailDBClientServiceImplTests {
 
-    @Autowired
-    private MockMvc mvc;
-
-    @MockBean
+    //[1] :
+    @Mock
+    //[2] : @MockBean
     private CocktailDBClient cocktailDBClientMock;
 
     private CocktailDBClientServiceImpl cocktailDBClientService;
@@ -51,27 +48,17 @@ public class CocktailServiceTests {
         drink.setStrIngredient3("Lime juice");
         drink.setStrIngredient4("Salt");
         CocktailDBResponse response = new CocktailDBResponse();
-        response.setDrinks(Arrays.asList(drink));
+        response.addDrink(drink);
         Mockito.when(cocktailDBClientMock.searchCocktails("Blue")).thenReturn(response);
     }
 
     @Test
-    public void testgetCocktailsViaDirectServiceCall_ExpectedCocktailsReturned() throws Exception
+    public void testgetCocktails_ExpectedCocktailsReturned() throws Exception
     {
-        List<CocktailResource> result = cocktailDBClientService.searchCocktailsNameContaining("Blue");
+        Set<CocktailResource> result = cocktailDBClientService.searchCocktailsNameContaining("Blue");
 
-        //can't test on uuid since it's randomly generated in servicelayer
-        Assert.assertEquals("Blue Margerita servicetest", result.get(0).getName());
+        Assert.assertNotNull(result.stream().filter(c -> c.getName().equals("Blue Margerita servicetest")).findAny());
+        Assert.assertEquals(1, result.stream().filter(c -> c.getName().equals("Blue Margerita servicetest")).count());
     }
 
-    @Test
-    public void testgetCocktailsViaControllerApiCall_ExpectedCocktailsReturned() throws Exception
-    {
-        mvc.perform( MockMvcRequestBuilders
-                .get("/cocktails")
-                .param("search", "Blue")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Blue Margerita servicetest"));
-
-    }
 }
