@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,5 +66,22 @@ public class CocktailServiceImpl implements CocktailService {
         return allCocktailsSet.stream()
                 .map(c -> new CocktailResource(c.id, c.name, c.ingredients))
                 .collect(Collectors.toSet());
+    }
+
+    public CocktailResource searchCocktailById(String cocktailId) {
+        return searchCocktailByName(cocktailRepository.findById(UUID.fromString(cocktailId)).get().name);
+    }
+
+    public CocktailResource searchCocktailByName(String name) {
+        CocktailEntity cocktailEntity = cocktailRepository.findByName(name);
+        return new CocktailResource(cocktailEntity.id, cocktailEntity.name, cocktailEntity.ingredients);
+    }
+
+    public boolean doesCocktailExist(String cocktailId) {
+        return cocktailRepository.existsById(UUID.fromString(cocktailId));
+    }
+
+    public void emptyTable() {
+        cocktailRepository.deleteAll();
     }
 }

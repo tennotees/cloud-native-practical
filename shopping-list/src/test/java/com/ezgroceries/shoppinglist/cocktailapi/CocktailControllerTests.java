@@ -3,6 +3,7 @@ package com.ezgroceries.shoppinglist.cocktailapi;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.ezgroceries.shoppinglist.cocktailapi.controller.CocktailController;
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
 import com.ezgroceries.shoppinglist.cocktailapi.service.CocktailDBClientServiceImpl;
 import java.util.Arrays;

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "SHOPPING_LIST")
 public class ShoppingListEntity {
 
-    @Id private UUID id;
-    private String name;
+    @Id public UUID id;
+    public String name;
 
 }

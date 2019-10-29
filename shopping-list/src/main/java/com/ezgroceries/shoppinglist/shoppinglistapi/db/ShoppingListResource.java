@@ -12,10 +12,18 @@ public class ShoppingListResource {
     private String name;
     private Set<UUID> cocktailIds;
 
+    public ShoppingListResource() {}
+
     public ShoppingListResource(String name) {
-        this.shoppingListId = UUID.fromString("27912cbc-165e-4182-8491-23afb0e29919");
+        this.shoppingListId = UUID.randomUUID();
         this.name = name;
         this.cocktailIds = new HashSet<>();
+    }
+
+    public ShoppingListResource(UUID id, String name, Set<UUID> cocktailIds) {
+        this.shoppingListId = id;
+        this.name = name;
+        this.cocktailIds = cocktailIds;
     }
 
     public UUID getShoppingListId() {

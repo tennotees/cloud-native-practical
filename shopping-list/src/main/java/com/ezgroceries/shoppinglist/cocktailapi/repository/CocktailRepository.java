@@ -10,8 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface CocktailRepository extends CrudRepository<CocktailEntity, UUID> {
 
     List<CocktailEntity> findByNameContaining(String name);
-    CocktailEntity findByIddrink(String id_drink);
-    CocktailEntity saveAndFlush(CocktailEntity cocktailEntity);
-
-
+    CocktailEntity findByName(String name);
 }

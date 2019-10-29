@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.cocktailapi;
+package com.ezgroceries.shoppinglist.cocktailapi.controller;
 
 import com.ezgroceries.shoppinglist.cocktailapi.db.CocktailResource;
 import com.ezgroceries.shoppinglist.cocktailapi.service.CocktailService;
