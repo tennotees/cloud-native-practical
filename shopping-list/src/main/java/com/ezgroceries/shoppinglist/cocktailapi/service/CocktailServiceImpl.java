@@ -45,7 +45,7 @@ public class CocktailServiceImpl implements CocktailService {
                             drink.getStrIngredient3(),drink.getStrIngredient4(), drink.getStrIngredient5(),
                             drink.getStrIngredient6(),drink.getStrIngredient7()));
                     ingredients.removeIf(Strings::isNullOrEmpty);
-                    CocktailEntity cocktailEntity = new CocktailEntity(drink.getIdDrink(), drink.getStrDrink(), ingredients);
+                    CocktailEntity cocktailEntity = new CocktailEntity(drink.getIdDrink(), drink.getStrDrink(), drink.getStrGlass(), drink.getStrInstructions(), drink.getStrDrinkThumb(), ingredients);
                     cocktailRepository.save(cocktailEntity);
                     return cocktailEntity;
                 }).collect(HashSet::new, HashSet::add, HashSet::addAll);
