@@ -17,17 +17,21 @@ public class CocktailEntity {
     @Column(name = "ID_DRINK")
     public String iddrink;
     public String name;
+    public String glass;
+    public String instructions;
+    public String image;
     @Convert(converter = StringSetConverter.class)
     public Set<String> ingredients;
 
-    public  CocktailEntity() {
+    public  CocktailEntity() {}
 
-    }
-
-    public CocktailEntity(String id_drink, String name, Set<String> ingredients) {
+    public CocktailEntity(String id_drink, String name, String glass, String instructions, String image, Set<String> ingredients) {
         this.id = UUID.randomUUID();
         this.iddrink = id_drink;
         this.name = name;
+        this.glass = glass;
+        this.instructions = instructions;
+        this.image = image;
         this.ingredients = ingredients;
     }
 
