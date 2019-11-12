@@ -1,24 +1,93 @@
-kind: Deployment
-metadata:
-  name: shopping-list-deployment
-  annotations:
-    version: 0.0.1-SNAPSHOT
-spec:
-  replicas: 1
-  template:
+kind: List
+apiVersion: v1
+items:
+  - kind: Deployment
     metadata:
-      labels:
-        name: shopping-list
-        component: shopping-list
+      name: shopping-list-deployment
+      annotations:
+        version: 0.0.1-SNAPSHOT
     spec:
-      containers:
-        - name: shopping-list
-          image: shopping-list:0.0.1-SNAPSHOT
-            ports:
-            - containerPort: 8080
-            - containerPort: 8443
-          lifecycle:
-            preStop:
-              exec:
-                # SIGTERM triggers a quick exit; gracefully terminate instead
-                command: ["kill", "-SIGINT", "`pidof java`"]
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            name: shopping-list
+            component: shopping-list
+        spec:
+          containers:
+            - name: shopping-list
+              image: shopping-list:0.0.1-SNAPSHOT
+                ports:
+                  - containerPort: 8080
+                  - containerPort: 8443
+              lifecycle:
+                preStop:
+                  exec:
+                    # SIGTERM triggers a quick exit; gracefully terminate instead
+                    command: ["kill", "-SIGINT", "`pidof java`"]
+              resources:
+                requests:
+                  memory: "64M"
+                  cpu: "50m"
+                limits:
+                  memory: "128M"
+                  cpu: "500m"
+              readinessProbe:
+                httpGet:
+                  path: /actuator/health
+                  port: 8080
+                initialDelaySeconds: 5
+                periodSeconds: 5
+              livenessProbe:
+                httpGet:
+                  path: /actuator/health
+                  port: 8080
+                initialDelaySeconds: 5
+                periodSeconds: 5
+              env:
+                - name: SPRING_PROFILES_ACTIVE
+                  value: "hsqldb"
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: shopping-list-service-http
+    type: LoadBalancer
+    spec:
+      selector:
+        app: shopping-list
+      ports:
+        - name: http
+          protocol: TCP
+          port: 80
+          targetPort: 8080
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: shopping-list-service-https
+    type: LoadBalancer
+    spec:
+      selector:
+        app: shopping-list
+      ports:
+        - name: https
+          protocol: TCP
+          port: 443
+          targetPort: 8443
+  - kind: Route
+    apiVersion: v1
+    metadata:
+      name: shopping-list-route-http
+    spec:
+      to:
+        kind: Service
+        name: shopping-list-service-http
+  - kind: Route
+    apiVersion: v1
+    metadata:
+      name: shopping-list-route-https
+    spec:
+      to:
+        kind: Service
+        name: shopping-list-service-https
+      tls:
+        termination: passthrough
